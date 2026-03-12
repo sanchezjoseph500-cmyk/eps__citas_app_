@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}EPS Citas Médicas{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+      EPS<span>+</span> Citas
+    </a>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}" {% if request.endpoint=='index' %}class="active"{% endif %}>Inicio</a></li>
+      <li><a href="{{ url_for('registro_paciente') }}" {% if request.endpoint=='registro_paciente' %}class="active"{% endif %}>Pacientes</a></li>
+      <li><a href="{{ url_for('reservar_cita_view') }}" {% if request.endpoint=='reservar_cita_view' %}class="active"{% endif %}>Reservar</a></li>
+      <li><a href="{{ url_for('consulta_cita') }}" {% if request.endpoint=='consulta_cita' %}class="active"{% endif %}>Consultar</a></li>
+    </ul>
+  </nav>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for cat, msg in messages %}
+          <div class="flash flash-{{ cat }}">
+            {% if cat == 'success' %}✓{% else %}⚠{% endif %}
+            {{ msg }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- PAGE CONTENT -->
+  {% block content %}{% endblock %}
+
+</body>
+</html>
