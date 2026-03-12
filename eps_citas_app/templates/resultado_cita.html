@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Resultados de Citas{% endblock %}
+
+{% block content %}
+<div class="page" style="max-width:800px;">
+  <div class="page-header">
+    <h2>📋 Mis Citas Médicas</h2>
+    <p>Se encontraron <strong>{{ citas|length }}</strong> cita(s) registrada(s).</p>
+  </div>
+
+  <div class="results-wrapper">
+    {% for cita in citas %}
+    <div class="cita-card">
+      <div class="cita-header">
+        <span class="patient-name">
+          {{ cita.nombre }} {{ cita.apellido }}
+        </span>
+        <span class="badge badge-{{ cita.tipo_cita | lower | replace('ó','o') | replace('é','e') }}">
+          {{ cita.tipo_cita }}
+        </span>
+      </div>
+
+      <div class="cita-body">
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Médico Asignado</label>
+            <span>{{ cita.medico }}</span>
+          </div>
+          <div class="info-item">
+            <label>Tipo de Cita</label>
+            <span>{{ cita.tipo_cita }}</span>
+          </div>
+          <div class="info-item">
+            <label>Fecha</label>
+            <span>{{ cita.fecha }}</span>
+          </div>
+          <div class="info-item">
+            <label>Hora</label>
+            <span>{{ cita.hora }}</span>
+          </div>
+          <div class="info-item" style="grid-column:1/-1">
+            <label>Dirección EPS</label>
+            <span>{{ cita.direccion_eps or '—' }}</span>
+          </div>
+        </div>
+
+        <a href="{{ url_for('actualizar_cita_view', cita_id=cita.id) }}"
+           class="btn btn-warning" style="font-size:.85rem; padding:.6rem 1.2rem;">
+          ✏️ Actualizar esta cita
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="form-actions" style="margin-top:2rem;">
+    <a href="{{ url_for('consulta_cita') }}" class="btn btn-ghost">← Nueva búsqueda</a>
+    <a href="{{ url_for('index') }}" class="btn btn-ghost">🏠 Inicio</a>
+  </div>
+</div>
+{% endblock %}

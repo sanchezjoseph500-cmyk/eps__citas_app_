@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Inicio — EPS Citas Médicas{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-badge">
+    <span>🏥</span> Sistema de Gestión Médica
+  </div>
+  <h1>
+    Gestiona tus<br>
+    <span class="accent-cyan">citas médicas</span><br>
+    <span class="accent-pink">sin complicaciones</span>
+  </h1>
+  <p>Plataforma digital para registrar pacientes, reservar y consultar citas médicas de forma rápida y segura.</p>
+</section>
+
+<div class="cards-grid">
+
+  <a href="{{ url_for('registro_paciente') }}" class="action-card cyan">
+    <div class="card-icon">👤</div>
+    <div class="card-title">Registrar Paciente</div>
+    <div class="card-desc">Agrega un nuevo paciente con su información de contacto y EPS asignada.</div>
+  </a>
+
+  <a href="{{ url_for('reservar_cita_view') }}" class="action-card violet">
+    <div class="card-icon">📅</div>
+    <div class="card-title">Reservar Cita</div>
+    <div class="card-desc">Asigna una cita médica: doctor, tipo, fecha, hora y dirección de atención.</div>
+  </a>
+
+  <a href="{{ url_for('consulta_cita') }}" class="action-card green">
+    <div class="card-icon">🔍</div>
+    <div class="card-title">Consultar Cita</div>
+    <div class="card-desc">Busca y visualiza tus citas agendadas ingresando tu número de documento.</div>
+  </a>
+
+  <a href="{{ url_for('consulta_cita') }}" class="action-card pink">
+    <div class="card-icon">✏️</div>
+    <div class="card-title">Actualizar Cita</div>
+    <div class="card-desc">Modifica la fecha, hora, médico o tipo de cita de una reserva existente.</div>
+  </a>
+
+</div>
+{% endblock %}
